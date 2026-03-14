@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<form method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+        {% if form.title.errors %}
+            <div class="text-danger">{{ form.title.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.description.label_tag }}
+        {{ form.description }}
+        {% if form.description.errors %}
+            <div class="text-danger">{{ form.description.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.published_year.label_tag }}
+        {{ form.published_year }}
+        {% if form.published_year.errors %}
+            <div class="text-danger">{{ form.published_year.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.pages.label_tag }}
+        {{ form.pages }}
+        {% if form.pages.errors %}
+            <div class="text-danger">{{ form.pages.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.author.label_tag }}
+        {{ form.author }}
+        {% if form.author.errors %}
+            <div class="text-danger">{{ form.author.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.categories.label_tag }}
+        {{ form.categories }}
+        {% if form.categories.errors %}
+            <div class="text-danger">{{ form.categories.errors }}</div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+{% endblock %}

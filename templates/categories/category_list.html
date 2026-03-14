@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<h1>Categories</h1>
+<ul class="list-group">
+    {% for category in categories %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{% url 'category-detail' category.pk %}">{{ category.name }}</a>
+        <span class="badge bg-primary rounded-pill">{{ category.books.count }}</span>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

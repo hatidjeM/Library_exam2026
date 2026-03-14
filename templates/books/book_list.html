@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Books{% endblock %}
+
+{% block content %}
+<h1>Books</h1>
+<div class="row">
+    {% for book in books %}
+    <div class="col-md-4">
+        <div class="card">
+            {% if book.title == "Harry Potter" %}
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81iqZ2HHD-L.jpg">
+
+            {% elif book.title == "Murder on the Orient Express" %}
+            <img src="https://agathachristie.imgix.net/hcus-paperback/MurderOnTheOrientExpress_PB.jpg?auto=compress">
+
+            {% elif book.title == "Animal Farm" %}
+            <img src="https://m.media-amazon.com/images/I/91zWJnJfqjL._SL1500_.jpg">
+
+            {% else %}
+            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">📚 {{ book.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">By {{ book.author.name }}</h6>
+                <p class="card-text">{{ book.description|truncatechars:100 }}</p>
+                <p class="card-text"><strong>Categories:</strong>
+                    {% for cat in book.categories.all %}{{ cat.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                </p>
+                <a href="{% url 'book-detail' book.pk %}" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

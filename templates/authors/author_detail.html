@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ author.name }}</h1>
+<p>Bio: {{ author.bio }}</p>
+<p>Books:</p>
+<ul>
+    {% for book in author.book_set.all %}
+    <li>{{ book.title }}</li>
+    {% empty %}
+    <p>No books.</p>
+    {% endfor %}
+</ul>
+<a href="{% url 'author-list' %}" class="btn btn-secondary">Back</a>
+{% endblock %}

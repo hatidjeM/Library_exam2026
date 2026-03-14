@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ category.name }}</h1>
+<p>Books in this category:</p>
+<ul>
+    {% for book in category.books.all %}
+    <li>{{ book.title }}</li>
+    {% empty %}
+    <p>No books in this category.</p>
+    {% endfor %}
+</ul>
+<a href="{% url 'category-list' %}" class="btn btn-secondary">Back</a>
+{% endblock %}

@@ -1,0 +1,44 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Book
+from .forms import BookCreateForm, BookEditForm
+
+# Списък книги
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, 'books/book_list.html', {'books': books})
+
+# Детайли книга
+def book_detail(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    return render(request, 'books/book_detail.html', {'book': book})
+
+# Създай книга
+def book_create(request):
+    if request.method == 'POST':
+        form = BookCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('book-list')
+    else:
+        form = BookCreateForm()
+    return render(request, 'books/book_form.html', {'form': form, 'title': 'Create Book'})
+
+# Редакция книга
+def book_edit(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == 'POST':
+        form = BookEditForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('book-detail', pk=book.pk)
+    else:
+        form = BookEditForm(instance=book)
+    return render(request, 'books/book_form.html', {'form': form, 'title': 'Edit Book'})
+
+# Изтриване книга с потвърждение
+def book_delete(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('book-list')
+    return render(request, 'books/book_confirm_delete.html', {'book': book})
