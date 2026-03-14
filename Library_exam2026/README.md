@@ -41,10 +41,3 @@ It demonstrates CRUD operations, data validation, custom templates, and styling 
 - HTML / CSS / Bootstrap
 
 ---
-
-## Setup Instructions
-
-1. Clone the repository:
-
-```bash
-git clone <your-repo-link>
